@@ -10,16 +10,16 @@ package info.infomila;
  * @author David
  */
 public class Categoria {
-    private long id;
+    private Long id;
     private String nom;
     private Categoria catPare;
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
-        if(id < 0){
+    public void setId(Long id) {
+        if(id < 0 ||id == null){
             throw new RunAppException("El id ha de ser positiu");
         }
         this.id = id;
@@ -44,7 +44,7 @@ public class Categoria {
         this.catPare = catPare;
     }
 
-    public Categoria(long id, String nom, Categoria catPare) {
+    public Categoria(Long id, String nom, Categoria catPare) {
         setId(id);
         setNom(nom);
         setCatPare(catPare);

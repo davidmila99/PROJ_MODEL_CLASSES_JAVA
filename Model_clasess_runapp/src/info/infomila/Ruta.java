@@ -14,27 +14,27 @@ import java.util.List;
  * @author David
  */
 public class Ruta {
-    private long id;
+    private Long id;
     private String titol;
     private String descMarkDown; 
-    private float desnivell;
-    private float alcadaMax;
-    private float alcadaMin;
-    private float distanciaKm;
+    private Float desnivell;
+    private Float alcadaMax;
+    private Float alcadaMin;
+    private Float distanciaKm;
     private Date temsAprox;
-    private boolean circular;
-    private float dificultat;
+    private Boolean circular;
+    private Float dificultat;
     private String urlGpx;
     private Foto fotoRuta;
     private List<Punt> puntsRuta = new ArrayList<>();
     private List<Categoria> catRuta = new ArrayList<>();
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
-        if(id < 0){
+    public void setId(Long id) {
+        if(id < 0 || id == null){
             throw new RunAppException("El id ha de ser positiu");
         }
         this.id = id;
@@ -62,36 +62,45 @@ public class Ruta {
         this.descMarkDown = descMarkDown;
     }
 
-    public float getDesnivell() {
+    public Float getDesnivell() {
         return desnivell;
     }
 
-    public void setDesnivell(float desnivell) {
+    public void setDesnivell(Float desnivell) {
+        if(desnivell == null){
+            throw new RunAppException("El desnivell es oblilgatori");
+        }
         this.desnivell = desnivell;
     }
 
-    public float getAlcadaMax() {
+    public Float getAlcadaMax() {
         return alcadaMax;
     }
 
-    public void setAlcadaMax(float alcadaMax) {
+    public void setAlcadaMax(Float alcadaMax) {
+        if(alcadaMax == null){
+            throw new RunAppException("La alcada maxima es obligatoria");
+        }
         this.alcadaMax = alcadaMax;
     }
 
-    public float getAlcadaMin() {
+    public Float getAlcadaMin() {
         return alcadaMin;
     }
 
-    public void setAlcadaMin(float alcadaMin) {
+    public void setAlcadaMin(Float alcadaMin) {
+        if(alcadaMin == null){
+            throw new RunAppException("La alcada minima es obligatoria");
+        }
         this.alcadaMin = alcadaMin;
     }
 
-    public float getDistanciaKm() {
+    public Float getDistanciaKm() {
         return distanciaKm;
     }
 
-    public void setDistanciaKm(float distanciaKm) {
-        if(distanciaKm < 0){
+    public void setDistanciaKm(Float distanciaKm) {
+        if(distanciaKm < 0 || distanciaKm == null){
             throw new RunAppException("La distancia ha de ser positiva");
         }
         this.distanciaKm = distanciaKm;
@@ -108,20 +117,23 @@ public class Ruta {
         this.temsAprox = temsAprox;
     }
 
-    public boolean isCircular() {
+    public Boolean isCircular() {
         return circular;
     }
 
-    public void setCircular(boolean circular) {
+    public void setCircular(Boolean circular) {
+        if(circular == null){
+            throw new RunAppException("Es obligatori di si es circular o no la ruta");
+        }
         this.circular = circular;
     }
 
-    public float getDificultat() {
+    public Float getDificultat() {
         return dificultat;
     }
 
-    public void setDificultat(float dificultat) {
-        if(dificultat < 0 || dificultat > 10){
+    public void setDificultat(Float dificultat) {
+        if(dificultat < 0 || dificultat > 10 || dificultat == null){
             throw new RunAppException("La dificultat ha de estar entre 0 i 10");
         }
         this.dificultat = dificultat;
@@ -168,7 +180,7 @@ public class Ruta {
         this.catRuta = catRuta;
     }
 
-    public Ruta(long id, String titol, String descMarkDown, float desnivell, float alcadaMax, float alcadaMin, float distanciaKm, Date temsAprox, boolean circular, float dificultat, String urlGpx, Foto fotoRuta, List<Punt> puntsRuta, List<Categoria> catRuta) {
+    public Ruta(long id, String titol, String descMarkDown, Float desnivell, Float alcadaMax, Float alcadaMin, Float distanciaKm, Date temsAprox, Boolean circular, Float dificultat, String urlGpx, Foto fotoRuta, List<Punt> puntsRuta, List<Categoria> catRuta) {
         setId(id);
         setTitol(titol);
         setDescMarkDown(descMarkDown);

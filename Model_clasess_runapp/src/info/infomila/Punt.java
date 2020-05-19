@@ -13,13 +13,13 @@ import java.util.Date;
  */
 public class Punt {
 
-    private int numero;
+    private Integer numero;
     private String nom;
     private String desc;
     private Date hora;
-    private double lat;
-    private double longitud;
-    private double elevacio;
+    private Double lat;
+    private Double longitud;
+    private Double elevacio;
     private Foto puntFoto;
     
     public Foto getPuntFoto() {
@@ -33,12 +33,12 @@ public class Punt {
         this.puntFoto = puntFoto;
     }
     
-    public int getNumero() {
+    public Integer getNumero() {
         return numero;
     }
 
-    public void setNumero(int numero) {
-        if(numero < 0){
+    public void setNumero(Integer numero) {
+        if(numero < 0 || numero == null){
             throw new RunAppException("El numeor del punt ha de ser positiu");
         }
         this.numero = numero;
@@ -77,31 +77,40 @@ public class Punt {
         this.hora = hora;
     }
 
-    public double getLat() {
+    public Double getLat() {
         return lat;
     }
 
-    public void setLat(double lat) {
+    public void setLat(Double lat) {
+        if(lat == null){
+            throw new RunAppException("La latitud no pot ser nula");
+        }
         this.lat = lat;
     }
 
-    public double getLongitud() {
+    public Double getLongitud() {
         return longitud;
     }
 
-    public void setLongitud(double longitud) {
+    public void setLongitud(Double longitud) {
+        if(longitud == null){
+            throw new RunAppException("La longitud no pot ser nula");
+        }
         this.longitud = longitud;
     }
 
-    public double getElevacio() {
+    public Double getElevacio() {
         return elevacio;
     }
 
-    public void setElevacio(double elevacio) {
+    public void setElevacio(Double elevacio) {
+        if(longitud == null){
+            throw new RunAppException("La elevacio no pot ser nula");
+        }
         this.elevacio = elevacio;
     }
     
-    public Punt(int numero, String nom, String desc, Date hora, double lat, double longitud, double elevacio,Foto puntFoto) {
+    public Punt(Integer numero, String nom, String desc, Date hora, Double lat, Double longitud, Double elevacio,Foto puntFoto) {
         setNumero(numero);
         setNom(nom);
         setDesc(desc);
