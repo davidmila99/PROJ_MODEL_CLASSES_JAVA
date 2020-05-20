@@ -5,14 +5,40 @@
  */
 package info.infomila;
 
+import java.io.Serializable;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 /**
  *
  * @author David
  */
-public class Foto {
+//@Entity
+//@Table(name = "Foto")
+public class Foto implements Serializable {
     
+    //@Id
+    //@Column(name = "foto_id")
+    private Integer id;
+    //@Column(name = "foto_url", nullable=false)
     private String urlFoto;
+    //@Column(name = "foto_titol",length = 15)
     private String titolFoto;
+    
+    
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        if(id == null || id < 0){
+            throw new RunAppException("El id es obligatori i ha de ser positiu");
+        }
+        this.id = id;
+    }
+    
     
     public String getUrlFoto() {
         return urlFoto;
@@ -41,6 +67,12 @@ public class Foto {
         setTitolFoto(titolFoto);
     }
 
+    public Foto(Integer id,String urlFoto, String titolFoto) {
+        setId(id);
+        setUrlFoto(urlFoto);
+        setTitolFoto(titolFoto);
+    }
+    
     @Override
     public String toString() {
         return "Foto{" + "urlFoto=" + urlFoto + ", titolFoto=" + titolFoto + '}';

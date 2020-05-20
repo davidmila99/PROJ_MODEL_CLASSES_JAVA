@@ -6,21 +6,50 @@
 package info.infomila;
 
 import java.util.Date;
-
 /**
  *
  * @author David
  */
+//@Entity
+//@Table(name = "Punt")
+//@IdClass(PuntID.class)
 public class Punt {
 
+    //@Id
+    //@Column(name = "punt_numero")
     private Integer numero;
+    //@Id
+    //@Column(name = "punt_ruta")
+    private Integer rutId;
+    //@Column(name = "punt_nom",length=255,nullable=false)
     private String nom;
+    //@Column(name = "punt_desc",nullable=false)
     private String desc;
+    //@Column(name = "punt_hora",nullable=false)
+    //@Temporal(TemporalType.TIMESTAMP)
     private Date hora;
+    //@Column(name = "punt_lat",nullable=false)
     private Double lat;
+    //@Column(name = "punt_long",nullable=false)
     private Double longitud;
+    //@Column(name = "punt_elevacio",nullable=false)
     private Double elevacio;
+    //@Column(name = "punt_elevacio",nullable=false)
+    //ManyToOne
     private Foto puntFoto;
+    
+    
+    public Integer getRutId() {
+        return rutId;
+    }
+
+    public void setRutId(Integer rutId) {
+        if(rutId == null || rutId < 0){
+            throw new RunAppException("Ha de ser positiu i existent");
+        }
+        this.rutId = rutId;
+    }
+    
     
     public Foto getPuntFoto() {
         return puntFoto;

@@ -8,26 +8,53 @@ package info.infomila;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 /**
  *
  * @author David
  */
+@Entity
+@Table(name = "Ruta")
 public class Ruta {
+    @Id
+    @Column(name = "rut_id")
     private Long id;
+    @Column(name = "rut_titol",length = 35,nullable = false)
     private String titol;
-    private String descMarkDown; 
+    @Column(name = "rut_desc_markdown",nullable = false)
+    private String descMarkDown;
+    @Column(name = "rut_desnivell",nullable = false)
     private Float desnivell;
+    @Column(name = "rut_alcada_max",nullable = false)
     private Float alcadaMax;
+    @Column(name = "rut_alcada_min",nullable = false)
     private Float alcadaMin;
+    @Column(name = "rut_distanciakm",nullable = false)
     private Float distanciaKm;
+    @Column(name = "rut_tempsaprox",nullable = false)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date temsAprox;
+    @Column(name = "rut_circular",nullable = false)
     private Boolean circular;
+    @Column(name = "rut_dificultat",nullable = false)
     private Float dificultat;
+    @Basic(optional = true)
+    @Column(name = "rut_gpxfile",nullable = true)
     private String urlGpx;
+    @Transient
     private Foto fotoRuta;
+    @Transient
     private List<Punt> puntsRuta = new ArrayList<>();
-    private List<Categoria> catRuta = new ArrayList<>();
+    @Transient
+    private Categoria catRuta;
 
     public Long getId() {
         return id;
@@ -169,18 +196,18 @@ public class Ruta {
         this.puntsRuta = puntsRuta;
     }
 
-    public List<Categoria> getCatRuta() {
+    public Categoria getCatRuta() {
         return catRuta;
     }
 
-    public void setCatRuta(List<Categoria> catRuta) {
-        if(catRuta == null || catRuta.size() == 0){
+    public void setCatRuta(Categoria catRuta) {
+        if(catRuta == null){
             throw new RunAppException("Ha de tenir minim una categoria");
         }
         this.catRuta = catRuta;
     }
 
-    public Ruta(long id, String titol, String descMarkDown, Float desnivell, Float alcadaMax, Float alcadaMin, Float distanciaKm, Date temsAprox, Boolean circular, Float dificultat, String urlGpx, Foto fotoRuta, List<Punt> puntsRuta, List<Categoria> catRuta) {
+    public Ruta(long id, String titol, String descMarkDown, Float desnivell, Float alcadaMax, Float alcadaMin, Float distanciaKm, Date temsAprox, Boolean circular, Float dificultat, String urlGpx, Foto fotoRuta, List<Punt> puntsRuta,Categoria catRuta) {
         setId(id);
         setTitol(titol);
         setDescMarkDown(descMarkDown);

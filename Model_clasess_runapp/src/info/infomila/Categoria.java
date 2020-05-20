@@ -5,20 +5,43 @@
  */
 package info.infomila;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
 /**
  *
  * @author David
  */
-public class Categoria {
-    private Long id;
+@Entity
+@Table(name = "Categoria")
+public class Categoria implements Serializable {
+    @Id
+    @Column(name = "cat_id")
+    private Integer id;
+    @Column(name = "cat_nom",length = 35,nullable=false)
     private String nom;
+    @Basic(optional = true)
+    @Column(name = "cat_pare",nullable = true)
+    @OneToMany(mappedBy = "Categoria")
     private Categoria catPare;
+    @OneToMany(mappedBy = "Categoria",fetch = FetchType.LAZY)
+    @JoinColumn(insertable = true,updatable = true)
+    private List<Ruta> rutesCat = new ArrayList<>();
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         if(id < 0 ||id == null){
             throw new RunAppException("El id ha de ser positiu");
         }
@@ -44,7 +67,7 @@ public class Categoria {
         this.catPare = catPare;
     }
 
-    public Categoria(Long id, String nom, Categoria catPare) {
+    public Categoria(Integer id, String nom, Categoria catPare) {
         setId(id);
         setNom(nom);
         setCatPare(catPare);
