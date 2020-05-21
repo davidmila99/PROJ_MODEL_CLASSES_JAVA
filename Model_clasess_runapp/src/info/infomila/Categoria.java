@@ -7,15 +7,21 @@ package info.infomila;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 import javax.persistence.Basic;
+import javax.persistence.CollectionTable;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.ForeignKey;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 /**
  *
@@ -29,13 +35,15 @@ public class Categoria implements Serializable {
     private Integer id;
     @Column(name = "cat_nom",length = 35,nullable=false)
     private String nom;
-    @Basic(optional = true)
-    @Column(name = "cat_pare",nullable = true)
-    @OneToMany(mappedBy = "Categoria")
-    private Categoria catPare;
-    @OneToMany(mappedBy = "Categoria",fetch = FetchType.LAZY)
-    @JoinColumn(insertable = true,updatable = true)
-    private List<Ruta> rutesCat = new ArrayList<>();
+    
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(insertable = true, updatable = true)
+    private List<Categoria> catFilles;
+    @ElementCollection
+    @CollectionTable(name = "Ruta",
+            joinColumns = @JoinColumn(name = "rut_cat",
+                    foreignKey = @ForeignKey(name = "FK_RUTCAT_CAT")))
+    private List<Ruta> rutesCat;
 
     public Integer getId() {
         return id;
@@ -59,18 +67,13 @@ public class Categoria implements Serializable {
         this.nom = nom;
     }
 
-    public Categoria getCatPare() {
-        return catPare;
-    }
 
-    public void setCatPare(Categoria catPare) {
-        this.catPare = catPare;
-    }
 
-    public Categoria(Integer id, String nom, Categoria catPare) {
+    public Categoria(Integer id, String nom) {
         setId(id);
         setNom(nom);
-        setCatPare(catPare);
+        rutesCat = new ArrayList<>();
+        catFilles = new ArrayList<>();
     }
 
     public Categoria() {
@@ -78,10 +81,83 @@ public class Categoria implements Serializable {
 
     @Override
     public String toString() {
-        return "Cateogoria{" + "id=" + id + ", nom=" + nom + ", catPare=" + catPare.toString() + '}';
+        return nom;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 97 * hash + Objects.hashCode(this.id);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Categoria other = (Categoria) obj;
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
+        return true;
+    }
+      
+    public int getRutesCount(){
+        return catFilles.size();
+    }
+
+    public Ruta getRuta(int index){
+        return rutesCat.get(index);
+    }
+
+    public Iterator<Ruta> getRutes(){
+        return rutesCat.iterator();
+    }
+
+    public void addRuta(Ruta r){
+        rutesCat.add(r);
+    }
+
+    public Ruta deleteRuta(int index){
+        return rutesCat.remove(index);
+    }
+
+    public void deleteRuta(Ruta r){
+        rutesCat.remove(r);
     }
     
     
-    
-    
+    public int getCatFillesCount(){
+        return catFilles.size();
+    }
+
+    public Categoria getCatFilla(int index){
+        return catFilles.get(index);
+    }
+
+    public Iterator<Categoria> getCatFilles(){
+        return catFilles.iterator();
+    }
+
+    public void addCatFilla(Categoria filla){
+        catFilles.add(filla);
+    }
+
+    public Categoria deleteCatFilla(int index){
+        return catFilles.remove(index);
+    }
+
+    public void deleteCatFilla(Categoria filla){
+        catFilles.remove(filla);
+    }
+
+
+
 }

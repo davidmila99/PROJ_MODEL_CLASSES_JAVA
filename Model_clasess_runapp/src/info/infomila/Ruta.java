@@ -5,11 +5,13 @@
  */
 package info.infomila;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
+import javax.persistence.Embeddable;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -21,9 +23,9 @@ import javax.persistence.Transient;
  *
  * @author David
  */
-@Entity
+@Embeddable
 @Table(name = "Ruta")
-public class Ruta {
+public class Ruta implements Serializable{
     @Id
     @Column(name = "rut_id")
     private Long id;
@@ -230,6 +232,11 @@ public class Ruta {
     @Override
     public String toString() {
         return "Ruta{" + "id=" + id + ", titol=" + titol + ", descMarkDown=" + descMarkDown + ", desnivell=" + desnivell + ", alcadaMax=" + alcadaMax + ", alcadaMin=" + alcadaMin + ", distanciaKm=" + distanciaKm + ", temsAprox=" + temsAprox + ", circular=" + circular + ", dificultat=" + dificultat + ", urlGpx=" + urlGpx + ", fotoRuta=" + fotoRuta + ", puntsRuta=" + puntsRuta + ", catRuta=" + catRuta + '}';
+    }
+
+    public Ruta(Long id, String titol) {
+        this.id = id;
+        this.titol = titol;
     }
     
     

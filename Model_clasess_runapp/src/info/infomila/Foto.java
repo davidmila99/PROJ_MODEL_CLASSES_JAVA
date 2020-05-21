@@ -17,7 +17,7 @@ import javax.persistence.Table;
  */
 //@Entity
 //@Table(name = "Foto")
-public class Foto implements Serializable {
+public class Foto {
     
     //@Id
     //@Column(name = "foto_id")
