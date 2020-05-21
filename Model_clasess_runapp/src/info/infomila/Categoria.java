@@ -11,6 +11,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
@@ -19,8 +20,10 @@ import javax.persistence.FetchType;
 import javax.persistence.ForeignKey;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 
 /**
@@ -36,9 +39,16 @@ public class Categoria implements Serializable {
     @Column(name = "cat_nom",length = 35,nullable=false)
     private String nom;
     
-    @OneToMany(fetch = FetchType.LAZY)
-    @JoinColumn(insertable = true, updatable = true)
+    @ManyToOne(optional = true, cascade=CascadeType.PERSIST,
+            fetch=FetchType.LAZY)
+    @JoinColumn(name = "cat_pare", nullable = true,
+            foreignKey = @ForeignKey(name = "FK_CATPARE_CATEGORIA"))
+    private Categoria catPare;
+    @OneToMany(mappedBy = "catPare")
     private List<Categoria> catFilles;
+    
+    
+    
     @ElementCollection
     @CollectionTable(name = "Ruta",
             joinColumns = @JoinColumn(name = "rut_cat",
@@ -60,6 +70,14 @@ public class Categoria implements Serializable {
         return nom;
     }
 
+    public Categoria getCatPare() {
+        return catPare;
+    }
+
+    public void setCatPare(Categoria catPare) {
+        this.catPare = catPare;
+    }
+    
     public void setNom(String nom) {
         if(nom==null){
             throw new RunAppException("El nom es obligatori");
@@ -69,9 +87,10 @@ public class Categoria implements Serializable {
 
 
 
-    public Categoria(Integer id, String nom) {
+    public Categoria(Integer id, String nom,Categoria c) {
         setId(id);
         setNom(nom);
+        setCatPare(c);
         rutesCat = new ArrayList<>();
         catFilles = new ArrayList<>();
     }

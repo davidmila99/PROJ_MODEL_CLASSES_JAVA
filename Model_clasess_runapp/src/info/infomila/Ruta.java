@@ -24,14 +24,14 @@ import javax.persistence.Transient;
  * @author David
  */
 @Embeddable
-@Table(name = "Ruta")
 public class Ruta implements Serializable{
-    @Id
+    
     @Column(name = "rut_id")
-    private Long id;
+    private Integer id;
     @Column(name = "rut_titol",length = 35,nullable = false)
     private String titol;
-    @Column(name = "rut_desc_markdown",nullable = false)
+    //@Column(name = "rut_desc_markdown",nullable = false)
+    @Transient
     private String descMarkDown;
     @Column(name = "rut_desnivell",nullable = false)
     private Float desnivell;
@@ -48,21 +48,20 @@ public class Ruta implements Serializable{
     private Boolean circular;
     @Column(name = "rut_dificultat",nullable = false)
     private Float dificultat;
-    @Basic(optional = true)
-    @Column(name = "rut_gpxfile",nullable = true)
+    //@Basic(optional = true)
+    //@Column(name = "rut_gpxfile",nullable = true)
+    @Transient
     private String urlGpx;
     @Transient
     private Foto fotoRuta;
     @Transient
     private List<Punt> puntsRuta = new ArrayList<>();
-    @Transient
-    private Categoria catRuta;
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         if(id < 0 || id == null){
             throw new RunAppException("El id ha de ser positiu");
         }
@@ -198,18 +197,9 @@ public class Ruta implements Serializable{
         this.puntsRuta = puntsRuta;
     }
 
-    public Categoria getCatRuta() {
-        return catRuta;
-    }
 
-    public void setCatRuta(Categoria catRuta) {
-        if(catRuta == null){
-            throw new RunAppException("Ha de tenir minim una categoria");
-        }
-        this.catRuta = catRuta;
-    }
 
-    public Ruta(long id, String titol, String descMarkDown, Float desnivell, Float alcadaMax, Float alcadaMin, Float distanciaKm, Date temsAprox, Boolean circular, Float dificultat, String urlGpx, Foto fotoRuta, List<Punt> puntsRuta,Categoria catRuta) {
+    public Ruta(Integer id, String titol, String descMarkDown, Float desnivell, Float alcadaMax, Float alcadaMin, Float distanciaKm, Date temsAprox, Boolean circular, Float dificultat, String urlGpx, Foto fotoRuta, List<Punt> puntsRuta) {
         setId(id);
         setTitol(titol);
         setDescMarkDown(descMarkDown);
@@ -223,7 +213,6 @@ public class Ruta implements Serializable{
         setUrlGpx(urlGpx);
         setFotoRuta(fotoRuta);
         setPuntsRuta(puntsRuta);
-        setCatRuta(catRuta);
     }
 
     public Ruta() {
@@ -231,10 +220,10 @@ public class Ruta implements Serializable{
 
     @Override
     public String toString() {
-        return "Ruta{" + "id=" + id + ", titol=" + titol + ", descMarkDown=" + descMarkDown + ", desnivell=" + desnivell + ", alcadaMax=" + alcadaMax + ", alcadaMin=" + alcadaMin + ", distanciaKm=" + distanciaKm + ", temsAprox=" + temsAprox + ", circular=" + circular + ", dificultat=" + dificultat + ", urlGpx=" + urlGpx + ", fotoRuta=" + fotoRuta + ", puntsRuta=" + puntsRuta + ", catRuta=" + catRuta + '}';
+        return "Ruta{" + "id=" + id + ", titol=" + titol + ", descMarkDown=" + descMarkDown + ", desnivell=" + desnivell + ", alcadaMax=" + alcadaMax + ", alcadaMin=" + alcadaMin + ", distanciaKm=" + distanciaKm + ", temsAprox=" + temsAprox + ", circular=" + circular + ", dificultat=" + dificultat + ", urlGpx=" + urlGpx + ", fotoRuta=" + fotoRuta + ", puntsRuta=" + puntsRuta + '}';
     }
 
-    public Ruta(Long id, String titol) {
+    public Ruta(Integer id, String titol) {
         this.id = id;
         this.titol = titol;
     }
