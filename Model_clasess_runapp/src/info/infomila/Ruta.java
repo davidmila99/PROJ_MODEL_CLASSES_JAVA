@@ -41,8 +41,7 @@ public class Ruta implements Serializable{
     private Float alcadaMin;
     @Column(name = "rut_distanciakm",nullable = false)
     private Float distanciaKm;
-    @Column(name = "rut_tempsaprox",nullable = false)
-    @Temporal(TemporalType.TIMESTAMP)
+    @Transient
     private Date temsAprox;
     @Column(name = "rut_circular",nullable = false)
     private Boolean circular;
