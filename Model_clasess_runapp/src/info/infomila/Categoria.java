@@ -18,11 +18,14 @@ import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.ForeignKey;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.TableGenerator;
 import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 
@@ -54,6 +57,8 @@ public class Categoria implements Serializable {
             joinColumns = @JoinColumn(name = "rut_cat",
                     foreignKey = @ForeignKey(name = "FK_RUTCAT_CAT")))
     private List<Ruta> rutesCat;
+
+
 
     public Integer getId() {
         return id;
@@ -87,7 +92,7 @@ public class Categoria implements Serializable {
 
 
 
-    public Categoria(Integer id, String nom,Categoria c) {
+    public Categoria(Integer id,String nom,Categoria c) {
         setId(id);
         setNom(nom);
         setCatPare(c);

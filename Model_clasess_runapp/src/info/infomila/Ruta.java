@@ -33,22 +33,20 @@ public class Ruta implements Serializable{
     //@Column(name = "rut_desc_markdown",nullable = false)
     @Transient
     private String descMarkDown;
-    @Column(name = "rut_desnivell",nullable = false)
+    @Transient
     private Float desnivell;
-    @Column(name = "rut_alcada_max",nullable = false)
+    @Transient
     private Float alcadaMax;
-    @Column(name = "rut_alcada_min",nullable = false)
+    @Transient
     private Float alcadaMin;
-    @Column(name = "rut_distanciakm",nullable = false)
+    @Transient
     private Float distanciaKm;
     @Transient
     private Date temsAprox;
-    @Column(name = "rut_circular",nullable = false)
+    @Transient
     private Boolean circular;
-    @Column(name = "rut_dificultat",nullable = false)
+    @Transient
     private Float dificultat;
-    //@Basic(optional = true)
-    //@Column(name = "rut_gpxfile",nullable = true)
     @Transient
     private String urlGpx;
     @Transient
