@@ -6,17 +6,9 @@
 package info.infomila;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import javax.persistence.Basic;
+import java.sql.Timestamp;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
 /**
@@ -42,7 +34,7 @@ public class Ruta implements Serializable{
     @Transient
     private Float distanciaKm;
     @Transient
-    private Date temsAprox;
+    private Timestamp temsAprox;
     @Transient
     private Boolean circular;
     @Transient
@@ -144,11 +136,11 @@ public class Ruta implements Serializable{
         this.distanciaKm = distanciaKm;
     }
 
-    public Date getTemsAprox() {
+    public Timestamp getTemsAprox() {
         return temsAprox;
     }
 
-    public void setTemsAprox(Date temsAprox) {
+    public void setTemsAprox(Timestamp temsAprox) {
         if(temsAprox == null){
             throw new RunAppException("El temps aproximat es obligatori");
         }
@@ -195,7 +187,7 @@ public class Ruta implements Serializable{
         }
         this.fotoRuta = fotoRuta;
     }
-    public Ruta(Integer id, String titol, String descMarkDown, Float desnivell, Float alcadaMax, Float alcadaMin, Float distanciaKm, Date temsAprox, Boolean circular, Float dificultat, String urlGpx, Foto fotoRuta) {
+    public Ruta(Integer id, String titol, String descMarkDown, Float desnivell, Float alcadaMax, Float alcadaMin, Float distanciaKm, Timestamp temsAprox, Boolean circular, Float dificultat, String urlGpx, Foto fotoRuta) {
         setId(id);
         setTitol(titol);
         setDescMarkDown(descMarkDown);
@@ -210,7 +202,7 @@ public class Ruta implements Serializable{
         setFotoRuta(fotoRuta);
     }
 
-    public Ruta(Integer id, String titol, String descMarkDown, Float desnivell, Float alcadaMax, Float alcadaMin, Float distanciaKm, Date temsAprox, Boolean circular, Float dificultat, String urlGpx, Foto fotoRuta, Categoria catPare) {
+    public Ruta(Integer id, String titol, String descMarkDown, Float desnivell, Float alcadaMax, Float alcadaMin, Float distanciaKm, Timestamp temsAprox, Boolean circular, Float dificultat, String urlGpx, Foto fotoRuta, Categoria catPare) {
         this.id = id;
         this.titol = titol;
         this.descMarkDown = descMarkDown;
