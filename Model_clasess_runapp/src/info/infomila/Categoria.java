@@ -91,6 +91,10 @@ public class Categoria implements Serializable {
     }
 
 
+    public Categoria(Integer id,String nom) {
+        setId(id);
+        setNom(nom);
+    }
 
     public Categoria(Integer id,String nom,Categoria c) {
         setId(id);

@@ -51,8 +51,21 @@ public class Ruta implements Serializable{
     private String urlGpx;
     @Transient
     private Foto fotoRuta;
+    //@Transient
+    //private List<Punt> puntsRuta = new ArrayList<>();
     @Transient
-    private List<Punt> puntsRuta = new ArrayList<>();
+    private Categoria catPare;
+
+    public Categoria getCatPare() {
+        return catPare;
+    }
+
+    public void setCatPare(Categoria catPare) {
+        if(catPare == null){
+            throw new RunAppException("La categoria pare es obligatoria");
+        }
+        this.catPare = catPare;
+    }
 
     public Integer getId() {
         return id;
@@ -182,21 +195,7 @@ public class Ruta implements Serializable{
         }
         this.fotoRuta = fotoRuta;
     }
-
-    public List<Punt> getPuntsRuta() {
-        return puntsRuta;
-    }
-
-    public void setPuntsRuta(List<Punt> puntsRuta) {
-        if(puntsRuta == null || puntsRuta.size() == 0){
-            throw new RunAppException("Els punts de la ruta no poden ser nul i ha de tenir un punt com a minim");
-        }
-        this.puntsRuta = puntsRuta;
-    }
-
-
-
-    public Ruta(Integer id, String titol, String descMarkDown, Float desnivell, Float alcadaMax, Float alcadaMin, Float distanciaKm, Date temsAprox, Boolean circular, Float dificultat, String urlGpx, Foto fotoRuta, List<Punt> puntsRuta) {
+    public Ruta(Integer id, String titol, String descMarkDown, Float desnivell, Float alcadaMax, Float alcadaMin, Float distanciaKm, Date temsAprox, Boolean circular, Float dificultat, String urlGpx, Foto fotoRuta) {
         setId(id);
         setTitol(titol);
         setDescMarkDown(descMarkDown);
@@ -209,20 +208,52 @@ public class Ruta implements Serializable{
         setDificultat(dificultat);
         setUrlGpx(urlGpx);
         setFotoRuta(fotoRuta);
-        setPuntsRuta(puntsRuta);
     }
 
+    public Ruta(Integer id, String titol, String descMarkDown, Float desnivell, Float alcadaMax, Float alcadaMin, Float distanciaKm, Date temsAprox, Boolean circular, Float dificultat, String urlGpx, Foto fotoRuta, Categoria catPare) {
+        this.id = id;
+        this.titol = titol;
+        this.descMarkDown = descMarkDown;
+        this.desnivell = desnivell;
+        this.alcadaMax = alcadaMax;
+        this.alcadaMin = alcadaMin;
+        this.distanciaKm = distanciaKm;
+        this.temsAprox = temsAprox;
+        this.circular = circular;
+        this.dificultat = dificultat;
+        this.urlGpx = urlGpx;
+        this.fotoRuta = fotoRuta;
+        this.catPare = catPare;
+    }
+
+    
+    
     public Ruta() {
     }
 
     @Override
     public String toString() {
-        return "Ruta{" + "id=" + id + ", titol=" + titol + ", descMarkDown=" + descMarkDown + ", desnivell=" + desnivell + ", alcadaMax=" + alcadaMax + ", alcadaMin=" + alcadaMin + ", distanciaKm=" + distanciaKm + ", temsAprox=" + temsAprox + ", circular=" + circular + ", dificultat=" + dificultat + ", urlGpx=" + urlGpx + ", fotoRuta=" + fotoRuta + ", puntsRuta=" + puntsRuta + '}';
+        return "Ruta{" + "id=" + id + ", titol=" + titol + ", descMarkDown=" + descMarkDown + ", desnivell=" + desnivell + ", alcadaMax=" + alcadaMax + ", alcadaMin=" + alcadaMin + ", distanciaKm=" + distanciaKm + ", temsAprox=" + temsAprox + ", circular=" + circular + ", dificultat=" + dificultat + ", urlGpx=" + urlGpx + ", fotoRuta=" + fotoRuta + '}';
     }
 
     public Ruta(Integer id, String titol) {
         this.id = id;
         this.titol = titol;
+    }
+
+    public Ruta(Integer id, String titol, String descMarkDown, Float desnivell, Float alcadaMax, Float alcadaMin, Float distanciaKm, Boolean circular, Float dificultat, String urlGpx, Foto fotoRuta, Categoria catPare) {
+        this.id = id;
+        this.titol = titol;
+        this.descMarkDown = descMarkDown;
+        this.desnivell = desnivell;
+        this.alcadaMax = alcadaMax;
+        this.alcadaMin = alcadaMin;
+        this.distanciaKm = distanciaKm;
+        this.circular = circular;
+        this.dificultat = dificultat;
+        this.urlGpx = urlGpx;
+        this.fotoRuta = fotoRuta;
+        this.catPare = catPare;
     }
     
     
