@@ -5,7 +5,8 @@
  */
 package info.infomila;
 
-import java.util.Date;
+import java.sql.Timestamp;
+
 /**
  *
  * @author David
@@ -27,7 +28,7 @@ public class Punt {
     private String desc;
     //@Column(name = "punt_hora",nullable=false)
     //@Temporal(TemporalType.TIMESTAMP)
-    private Date hora;
+    private Long hora;
     //@Column(name = "punt_lat",nullable=false)
     private Double lat;
     //@Column(name = "punt_long",nullable=false)
@@ -95,11 +96,11 @@ public class Punt {
         this.desc = desc;
     }
 
-    public Date getHora() {
+    public Long getHora() {
         return hora;
     }
 
-    public void setHora(Date hora) {
+    public void setHora(Long hora) {
         if(hora == null){
             throw new RunAppException("La hora es obligatoria");
         }
@@ -139,7 +140,7 @@ public class Punt {
         this.elevacio = elevacio;
     }
     
-    public Punt(Integer numero, String nom, String desc, Date hora, Double lat, Double longitud, Double elevacio,Foto puntFoto) {
+    public Punt(Integer numero,String nom, String desc, Long hora, Double lat, Double longitud, Double elevacio,Foto puntFoto) {
         setNumero(numero);
         setNom(nom);
         setDesc(desc);
@@ -160,6 +161,20 @@ public class Punt {
         this.elevacio = elevacio;
         this.puntFoto = puntFoto;
     }
+
+    public Punt(Integer numero, Integer rutId, String nom, String desc, Long hora, Double lat, Double longitud, Double elevacio, Foto puntFoto) {
+        this.numero = numero;
+        this.rutId = rutId;
+        this.nom = nom;
+        this.desc = desc;
+        this.hora = hora;
+        this.lat = lat;
+        this.longitud = longitud;
+        this.elevacio = elevacio;
+        this.puntFoto = puntFoto;
+    }
+    
+    
     
     
 

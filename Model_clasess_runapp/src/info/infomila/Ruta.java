@@ -6,6 +6,7 @@
 package info.infomila;
 
 import java.io.Serializable;
+import java.sql.Date;
 import java.sql.Timestamp;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
@@ -34,7 +35,7 @@ public class Ruta implements Serializable{
     @Transient
     private Float distanciaKm;
     @Transient
-    private Timestamp temsAprox;
+    private Long temsAprox;
     @Transient
     private Boolean circular;
     @Transient
@@ -136,11 +137,11 @@ public class Ruta implements Serializable{
         this.distanciaKm = distanciaKm;
     }
 
-    public Timestamp getTemsAprox() {
+    public Long getTemsAprox() {
         return temsAprox;
     }
 
-    public void setTemsAprox(Timestamp temsAprox) {
+    public void setTemsAprox(Long temsAprox) {
         if(temsAprox == null){
             throw new RunAppException("El temps aproximat es obligatori");
         }
@@ -187,7 +188,7 @@ public class Ruta implements Serializable{
         }
         this.fotoRuta = fotoRuta;
     }
-    public Ruta(Integer id, String titol, String descMarkDown, Float desnivell, Float alcadaMax, Float alcadaMin, Float distanciaKm, Timestamp temsAprox, Boolean circular, Float dificultat, String urlGpx, Foto fotoRuta) {
+    public Ruta(Integer id, String titol, String descMarkDown, Float desnivell, Float alcadaMax, Float alcadaMin, Float distanciaKm, Long temsAprox, Boolean circular, Float dificultat, String urlGpx, Foto fotoRuta) {
         setId(id);
         setTitol(titol);
         setDescMarkDown(descMarkDown);
@@ -202,7 +203,7 @@ public class Ruta implements Serializable{
         setFotoRuta(fotoRuta);
     }
 
-    public Ruta(Integer id, String titol, String descMarkDown, Float desnivell, Float alcadaMax, Float alcadaMin, Float distanciaKm, Timestamp temsAprox, Boolean circular, Float dificultat, String urlGpx, Foto fotoRuta, Categoria catPare) {
+    public Ruta(Integer id, String titol, String descMarkDown, Float desnivell, Float alcadaMax, Float alcadaMin, Float distanciaKm, Long temsAprox, Boolean circular, Float dificultat, String urlGpx, Foto fotoRuta, Categoria catPare) {
         this.id = id;
         this.titol = titol;
         this.descMarkDown = descMarkDown;
