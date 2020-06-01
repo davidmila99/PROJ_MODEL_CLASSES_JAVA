@@ -138,7 +138,7 @@ public class Categoria implements Serializable {
     }
       
     public int getRutesCount(){
-        return catFilles.size();
+        return rutesCat.size();
     }
 
     public Ruta getRuta(int index){
